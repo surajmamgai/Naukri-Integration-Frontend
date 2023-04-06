@@ -69,7 +69,8 @@ export default function JobDetailsForm() {
                 alignItems: 'center',
                 width: '100%',
                 maxWidth: 500,
-                m: 'auto'
+                m: 'auto',
+                px: 2
             }}
         >
             <Stack spacing={2} alignItems="flex-start" >
@@ -84,7 +85,7 @@ export default function JobDetailsForm() {
                     valueLabelDisplay="auto"
                     min={0}
                     max={5000000}
-                    sx={{ mt: 3 }}
+                    sx={{ mt: 1 }}
                 />
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                     <TextField
@@ -141,7 +142,7 @@ export default function JobDetailsForm() {
                 </Box>
             </Box>
             <Stack spacing={2} alignItems="flex-start">
-                <Typography variant="body1" sx={{ mt: 2 }}>
+                <Typography variant="body1" sx={{ mt: 3 }}>
                     Experience:
                 </Typography>
                 <Slider
@@ -152,7 +153,7 @@ export default function JobDetailsForm() {
                     valueLabelDisplay="auto"
                     min={0}
                     max={50}
-                    sx={{ mt: 3 }}
+                    sx={{ mt: 1 }}
                 />
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                     <TextField
@@ -163,6 +164,7 @@ export default function JobDetailsForm() {
                         name="minimumYearsOfExperience"
                         type="number"
                         value={minimumYearsOfExperience}
+                        sx={{ mr: 2 }}
                         onChange={(event) => setMinimumYearsOfExperience(Number(event.target.value))}
                     />
                     <TextField
