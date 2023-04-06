@@ -49,8 +49,6 @@ const locations = [
 ];
 
 export default function Job() {
-    const [functionalArea, setFunctionalArea] = useState('');
-    const [location, setLocation] = useState('');
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -64,114 +62,112 @@ export default function Job() {
     };
 
     return (
-<Grid container component="main" sx={{ height: '100vh' }}>
-        <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage: 'url(https://img.freepik.com/free-photo/hiring-concept-with-empty-chair_23-2149519862.jpg)',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <Box
-            sx={{
+        <Grid container component="main" sx={{ height: '100vh' }}>
+            <CssBaseline />
+            <Grid
+                item
+                xs={false}
+                sm={4}
+                md={7}
+                sx={{
+                    backgroundImage: 'url(https://img.freepik.com/free-photo/hiring-concept-with-empty-chair_23-2149519862.jpg)',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundColor: (t) =>
+                        t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            />
+            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                <Box
+                    sx={{
 
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-        <Box
-            component="form"
-            onSubmit={handleSubmit}
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                width: '100%',
-                maxWidth: 500,
-                m: 'auto',
-                mt: 4,
-                px: 2,
-            }}
-        >
-            <Typography variant="h4" component="h1" gutterBottom>
-                Job Details
-            </Typography>
-            <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="title"
-                label="Title"
-                name="title"
-                autoComplete="title"
-            />
-            <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="jobDescription"
-                label="Job Description"
-                name="jobDescription"
-                multiline
-                rows={4}
-            />
-            <TextField
-                margin="normal"
-                required
-                fullWidth
-                label="Functional Area"
-                variant="outlined"
-                select
-                value={functionalArea}
-                onChange={(event) => setFunctionalArea(event.target.value)}
-            >
-                {functionalAreas.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                    </MenuItem>
-                ))}
-            </TextField>
-            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                label="Location"
-                variant="outlined"
-                select
-                value={location}
-                onChange={(event) => setLocation(event.target.value)}
-            >
-                {locations.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                    </MenuItem>
-                ))}
-            </TextField>
-            <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="referenceCode"
-                label="Reference Code"
-                name="referenceCode"
-                autoComplete="referenceCode"
-            />
-            <Button type="submit" variant="contained" sx={{ mt: 3 }}>
-                Submit
-            </Button>
-        </Box>
-        </Box>
-        </Grid>
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Box
+                        component="form"
+                        onSubmit={handleSubmit}
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            width: '100%',
+                            maxWidth: 500,
+                            m: 'auto',
+                            mt: 4,
+                            px: 2,
+                        }}
+                    >
+                        <Typography variant="h4" component="h1" gutterBottom>
+                            Job Details
+                        </Typography>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="title"
+                            label="Title"
+                            name="title"
+                            autoComplete="title"
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="jobDescription"
+                            label="Job Description"
+                            name="jobDescription"
+                            multiline
+                            rows={4}
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="fuctionalArea"
+                            label="Functional Area"
+                            name="fuctionalArea"
+                            select
+                        >
+                            {functionalAreas.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="location"
+                            label="Location"
+                            name="location"
+                            select
+                        >
+                            {locations.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="referenceCode"
+                            label="Reference Code"
+                            name="referenceCode"
+                            autoComplete="referenceCode"
+                        />
+                        <Button type="submit" variant="contained" sx={{ mt: 3 }}>
+                            Submit
+                        </Button>
+                    </Box>
+                </Box>
+            </Grid>
         </Grid>
     );
 }
