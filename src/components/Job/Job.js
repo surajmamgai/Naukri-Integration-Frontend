@@ -1,173 +1,124 @@
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { MenuItem } from '@mui/material';
-import { useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import { Step, Stepper, StepLabel } from '@mui/material';
+
+import JobDetailsForm from './JobForms/JobDetails';
+import JobSettingsForm from './JobForms/JobSettings';
+import ReviewJob from './JobForms/ReviewJob';
 
 
-const functionalAreas = [
-    {
-        value: 'accounting',
-        label: 'Accounting',
-    },
-    {
-        value: 'marketing',
-        label: 'Marketing',
-    },
-    {
-        value: 'operations',
-        label: 'Operations',
-    },
-    {
-        value: 'sales',
-        label: 'Sales',
-    },
-];
+const steps = ['Job Details', 'Job Settings', 'Additional Details'];
 
-const locations = [
-    {
-        value: 'new-delhi',
-        label: 'New Delhi',
-    },
-    {
-        value: 'mumbai',
-        label: 'Mumbai',
-    },
-    {
-        value: 'kolkata',
-        label: 'Kolkata',
-    },
-    {
-        value: 'chennai',
-        label: 'Chennai',
-    },
-];
+function getStepContent(step) {
+  switch (step) {
+    case 0:
+      return <JobDetailsForm />;
+    case 1:
+      return <JobSettingsForm />;
+    case 2:
+      return <ReviewJob />;
+    default:
+      throw new Error('Unknown step');
+  }
+}
 
 export default function Job() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            title: data.get('title'),
-            jobDescription: data.get('jobDescription'),
-            functionalArea: data.get('functionalArea'),
-            location: data.get('location'),
-            referenceCode: data.get('referenceCode'),
-        });
-    };
+  const [activeStep, setActiveStep] = React.useState(0);
+  const handleNext = () => {
+    setActiveStep(activeStep + 1);
+  };
 
-    return (
-        <Grid container component="main" sx={{ height: '100vh' }}>
-            <CssBaseline />
-            <Grid
-                item
-                xs={false}
-                sm={4}
-                md={7}
-                sx={{
-                    backgroundImage: 'url(https://img.freepik.com/free-photo/hiring-concept-with-empty-chair_23-2149519862.jpg)',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundColor: (t) =>
-                        t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                }}
-            />
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-                <Box
-                    sx={{
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
 
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Box
-                        component="form"
-                        onSubmit={handleSubmit}
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            width: '100%',
-                            maxWidth: 500,
-                            m: 'auto',
-                            mt: 4,
-                            px: 2,
-                        }}
-                    >
-                        <Typography variant="h4" component="h1" gutterBottom>
-                            Job Details
-                        </Typography>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="title"
-                            label="Title"
-                            name="title"
-                            autoComplete="title"
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="jobDescription"
-                            label="Job Description"
-                            name="jobDescription"
-                            multiline
-                            rows={4}
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="fuctionalArea"
-                            label="Functional Area"
-                            name="fuctionalArea"
-                            select
-                        >
-                            {functionalAreas.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="location"
-                            label="Location"
-                            name="location"
-                            select
-                        >
-                            {locations.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="referenceCode"
-                            label="Reference Code"
-                            name="referenceCode"
-                            autoComplete="referenceCode"
-                        />
-                        <Button type="submit" variant="contained" sx={{ mt: 3 }}>
-                            Submit
-                        </Button>
-                    </Box>
+
+  return (
+    <Grid container component="main" sx={{ height: '100vh' }}>
+      <CssBaseline />
+      <Grid
+        item
+        xs={false}
+        sm={4}
+        md={7}
+        sx={{
+          backgroundImage: 'url(https://img.freepik.com/free-vector/we-are-hiring-announcement-template-design_60438-1697.jpg)',
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: (t) =>
+            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Box
+          sx={{
+
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Box
+            component="form"
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '100%',
+              maxWidth: 500,
+              m: 'auto',
+              px: 2,
+            }}
+          >
+            <Typography variant="h4" component="h1" gutterBottom>
+              Post Job
+            </Typography>
+            <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 3 }}>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+            {activeStep === steps.length ? (
+              <React.Fragment>
+                <Typography variant="h5" gutterBottom>
+                  Your Job Has been Posted Successfully.
+                </Typography>
+                <Typography variant="subtitle1">
+                  Your Job Link is https://hono.ai/jobs/12456. We have emailed your Job Details
+                  to you, and will send you an update when your job will receive responses.
+                </Typography>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                {getStepContent(activeStep)}
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  {activeStep !== 0 && (
+                    <Button onClick={handleBack} sx={{ mt: 1, ml: 1 }}>
+                      Back
+                    </Button>
+                  )}
+
+                  <Button
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, ml: 1 }}
+                  >
+                    {activeStep === steps.length - 1 ? 'Add Job' : 'Next'}
+                  </Button>
                 </Box>
-            </Grid>
-        </Grid>
-    );
+              </React.Fragment>
+            )}
+          </Box>
+        </Box>
+      </Grid>
+    </Grid>
+  );
 }
