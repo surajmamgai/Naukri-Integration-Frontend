@@ -8,18 +8,18 @@ import Grid from '@mui/material/Grid';
 import { Step, Stepper, StepLabel } from '@mui/material';
 
 import JobDetailsForm from './JobForms/JobDetails';
-import JobSettingsForm from './JobForms/JobSettings';
 import ReviewJob from './JobForms/ReviewJob';
+import DesiredCandidateDetailsForm from './JobForms/DesiredCandidateDetails';
 
 
-const steps = ['Job Details', 'Job Settings', 'Additional Details'];
+const steps = ['Job Details', 'Candidate Details', 'Additional Details'];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return <JobDetailsForm />;
     case 1:
-      return <JobSettingsForm />;
+      return <DesiredCandidateDetailsForm />;
     case 2:
       return <ReviewJob />;
     default:
@@ -76,7 +76,7 @@ export default function Job() {
               px: 2,
             }}
           >
-            <Typography variant="h4" component="h1" gutterBottom>
+            <Typography variant="h4" component="h1" gutterBottom sx={{mt:2}}>
               Post Job
             </Typography>
             <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 3 }}>
